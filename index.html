@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Discover valuable educational resources provided by the IEEE ET5 Student Branch.">
+    <meta property="og:title" content="IEEE ET5 Student Branch - Educational Resources">
+    <meta property="og:description" content="Discover valuable educational resources provided by the IEEE ET5 Student Branch.">
+    <meta property="og:image" content="https://www.ieee.org/content/dam/ieee-web/standards/images/logo.svg ">
+    <meta property="og:url" content="https://yourwebsite.com/resources.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>IEEE ET5 Student Branch - Our Family</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'GA_MEASUREMENT_ID'); // Replace 'GA_MEASUREMENT_ID' with your actual Google Analytics Measurement ID
+    </script>
+
+    <style>
+        /* Root variables for consistent theming */
+        :root {
+            --primary: #00629B;
+            /* IEEE Blue */
+            --secondary: #FFD100;
+            /* IEEE Gold */
+            --dark: #003865;
+            /* Dark Blue */
+            --light: #E9F1F7;
+            /* Light Grayish Blue */
+            --accent: #00A5E3;
+            /* Lighter Blue */
+            --success: #28a745;
+            /* Green for success messages */
+            --error: #dc3545;
+            /* Red for error messages */
+        }
+
+        /* Universal box-sizing and font family */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+            scroll-behavior: smooth;
+            background-image: radial-gradient(circle at 10% 20%, rgba(0, 98, 155, 0.05) 5%, transparent 5%),
+                radial-gradient(circle at 90% 80%, rgba(255, 209, 0, 0.05) 5%, transparent 5%);
+            background-size: 50px 50px, 50px 50px;
+            background-attachment: fixed;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img[loading="lazy"] {
+            opacity: 0.8;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        img[loading="lazy"]:loaded {
+            opacity: 1;
+        }
+
+        /* Header Styling */
+        header#header {
+            background: linear-gradient(120deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        /* Header background when scrolled */
+        header#header.scrolled {
+            background-color: var(--dark);
+            /* Solid dark blue when scrolled */
+            border-bottom: 3px solid var(--secondary);
+            /* Add a border on scroll */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding-bottom: 5px;
+        }
+
+        /* Navigation underline effect */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            /* For LTR */
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            right: 0;
+            /* For LTR */
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            /* Slightly larger for touch */
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile navigation */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                background: var(--primary);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav.active {
+                display: block;
+                animation: fadeIn 0.5s ease;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: left;
+                /* Align to left for LTR */
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+                padding: 0 1rem;
+            }
+        }
+
+        main {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: auto;
+            position: relative;
+            /* For z-index stacking */
+            z-index: 2;
+            /* Ensure main content is above body background */
+            background-color: transparent;
+            /* Allow body background to show through */
+        }
+
+        section {
+            padding: 4rem 2rem;
+            direction: ltr;
+            /* Ensure LTR for content */
+            text-align: center;
+            /* Center section content */
+            position: relative;
+            /* For z-index stacking */
+            z-index: 2;
+            /* Ensure section content is above body background */
+            background-color: white;
+            /* Solid background to cover body pattern */
+            border-radius: 10px;
+            /* Rounded corners for sections */
+            margin-bottom: 2rem;
+            /* Space between sections */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            /* Subtle shadow for sections */
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            /* Space for underline */
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--secondary);
+            bottom: 0;
+            /* Position at the bottom of the title */
+            left: 25%;
+            border-radius: 50px;
+        }
+
+        /* General card styling for members */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+
+        .member-card.animated {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .member-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .member-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            /* Removed flex properties from h3 */
+        }
+
+        /* Styles for social link icons when placed below */
+        .member-social-links {
+            margin-top: 10px; /* Space from the position text */
+            display: flex;
+            justify-content: center; /* Center the icons horizontally */
+            gap: 15px; /* Space between icons */
+        }
+
+        .member-social-links a {
+            color: #3b5998; /* Default color for social icons (Facebook blue) */
+            font-size: 1.5em; /* Adjust icon size */
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .member-social-links a.facebook-icon {
+            color: #3b5998; /* Facebook blue */
+        }
+
+        .member-social-links a.linkedin-icon {
+            color: #0a66c2; /* LinkedIn blue */
+        }
+
+        .member-social-links a:hover {
+            transform: scale(1.2); /* Slightly enlarge on hover */
+        }
+
+
+        .member-card p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .member-card img {
+            width: 100px;
+            /* Adjust as needed */
+            height: 100px;
+            /* Adjust as needed */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--secondary);
+            /* Gold border for profile picture */
+        }
+
+        /* Golden membership badge */
+        .membership-badge {
+            display: inline-flex;
+            /* Use flex to align text and star */
+            align-items: center;
+            /* Vertically center items */
+            background-color: var(--secondary);
+            /* IEEE Gold */
+            color: var(--dark);
+            /* Dark Blue text */
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            /* Rounded corners */
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+            /* Space from the name */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+        }
+
+        .membership-badge .star-icon {
+            color: var(--dark);
+            /* Star color, can be adjusted */
+            font-size: 1em;
+            /* Adjust star size relative to text */
+            margin-left: 5px;
+            /* Space between text and star */
+        }
+
+        /* Section specific styling for member categories */
+        .member-category {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .member-category:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .member-category h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .member-category h2::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 15%;
+            border-radius: 50px;
+        }
+
+        /* High Board Tree Structure Specific Styles */
+        .high-board-tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centers the whole structure */
+            gap: 2rem;
+            /* Space between levels */
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .high-board-level {
+            display: flex;
+            justify-content: center;
+            /* Centers cards within their level */
+            width: 100%;
+            position: relative;
+            /* For pseudo-elements */
+        }
+
+        .high-board-level.other-roles-level {
+            flex-wrap: wrap;
+            /* Allow cards to wrap on smaller screens */
+            gap: 2rem;
+            /* Space between cards in this level */
+        }
+
+        /* Lines for the tree structure */
+        .chairman-level::after {
+            content: '';
+            position: absolute;
+            bottom: -2rem;
+            /* Half of the gap */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            /* Length of the vertical line */
+            background-color: var(--primary);
+            z-index: 1;
+        }
+
+        .vice-chairman-level::after {
+            content: '';
+            position: absolute;
+            bottom: -2rem;
+            /* Half of the gap */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            /* Length of the vertical line */
+            background-color: var(--primary);
+            z-index: 1;
+        }
+
+        .other-roles-level::before {
+            /* Horizontal line connecting to vice-chairman */
+            content: '';
+            position: absolute;
+            top: -2rem;
+            /* Half of the gap */
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            /* Center the horizontal line */
+            width: 80%;
+            /* Adjust width based on card spacing */
+            max-width: 400px;
+            /* Limit max width of horizontal line */
+            height: 2px;
+            background-color: var(--primary);
+            z-index: 1;
+        }
+
+        /* Adjust card positioning relative to lines */
+        .high-board-level .member-card {
+            position: relative;
+            z-index: 2;
+            /* Ensure cards are above lines */
+        }
+
+        /* Board Members Tree Structure Specific Styles (Reverted to standard grid) */
+        /* Removed all specific tree-like styles for .board-members-tree-container and its children */
+
+
+        /* Call to Action Buttons */
+        .cta-button {
+            background: var(--primary);
+            /* Fallback */
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+
+            /* New: Gradient background */
+            background-image: linear-gradient(to right, var(--primary) 0%, var(--accent) 100%);
+            background-size: 200% auto;
+            /* For hover effect */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            /* Subtle text shadow */
+        }
+
+        .cta-button:hover {
+            background-position: right center;
+            /* Shift gradient on hover */
+            background-image: linear-gradient(to right, var(--dark) 0%, var(--primary) 100%);
+            /* Darker gradient on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer Styling */
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: left;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1 1 250px;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a,
+        .footer-section ul li {
+            color: white;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease, transform 0.2s ease;
+            /* Added transform to transition */
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px) scale(1.1);
+            /* Lift and scale on hover */
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        /* General animate-on-scroll (now with scale) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            /* Slower and smoother */
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Hero section specific animations (not used in this page, but kept for consistency if copied) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* NoScript Warning */
+        noscript {
+            display: block;
+            background: #fee;
+            color: #a00;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-section {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .footer-section h3 {
+                margin: 1rem auto 1rem;
+            }
+
+            .footer-section ul li,
+            .social-links {
+                justify-content: center;
+            }
+
+            /* Responsive adjustments for tree lines */
+            /* Removed specific responsive adjustments for tree lines */
+        }
+    </style>
+</head>
+
+<body>
+
+    <noscript>
+        This website uses JavaScript. Please enable JavaScript to view all features of the site.
+    </noscript>
+
+    <header id="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://ieee.org.eg/wp-content/uploads/2022/05/logo-P-Mohamed-Adel-Hegazy-300x300.jpg " alt="IEEE ET5 Logo" loading="lazy">
+                <div class="logo-text">
+                    <h1>IEEE ET5 SB</h1>
+                    <span>IEEE Egyptian Students' Branch</span>
+                </div>
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5/">Home</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5/#about">About Us</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5-Membership/">Membership</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5-Events/">Events</a></li>
+                    <li><a href="#our-family">Our Family</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5-Ai/">AI Helper</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5/#contact-us">Contact Us</a></li>
+                </ul>
+            </nav>
+            <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="our-family" class="animate-on-scroll">
+            <h2 class="section-title">Our Family</h2>
+            <p style="text-align:center; margin-bottom: 2rem;">Meet the dedicated individuals who make up the IEEE ET5 Student Branch family.</p>
+
+            <div class="member-category">
+                <h2>Consular</h2>
+                <div class="members-grid">
+                    <div class="member-card animate-on-scroll">
+                        <img src="https://scontent.fcai2-1.fna.fbcdn.net/v/t39.30808-1/315776552_5422101484554928_5467481616298383183_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=109&ccb=1-7&_nc_sid=e99d92&_nc_ohc=7IAZWc53bagQ7kNvwGB3jfL&_nc_oc=AdmRaBc4d5ZcdQbNyieMLIivKxAvL6XoDRfkvMQIO15sa7oCR0ZjxfNLmWzvTSTUfXE&_nc_zt=24&_nc_ht=scontent.fcai2-1.fna&_nc_gid=z6Z2KFzv_YtX7aHR74LsIw&oh=00_AfKwJ-b2r9Zxs8M-_y98cR9AbpyJFPiOb03J4RhCAj_H7w&oe=6835F8E1" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Consular';" alt="صورة المستشار" loading="lazy">
+                        <h3>Dina Rostom <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Branch Consular</p>
+                        <div class="member-social-links">
+                            <a href="https://www.facebook.com/dina.zaki.58" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Dina Rostom"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/dina-rostom-b5980b257?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAD9NYLUB-VspTGfD7YVDUb2xvZr-16E4lqs&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3B97Q1fV3HRvupVFc%2F%2B51wsg%3D%3D" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Dina Rostom"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-category">
+                <h2>High Board</h2>
+                <div class="high-board-tree-container">
+                    <div class="high-board-level chairman-level">
+                        <div class="member-card animate-on-scroll">
+                            <img src="https://scontent.fcai2-1.fna.fbcdn.net/v/t39.30808-1/457438899_2249958492009348_5597224282149931167_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=1d2534&_nc_ohc=4FnQeJG4OSkQ7kNvwEyEbi2&_nc_oc=AdlIULNytXu7prITecIIivMAjT-0VG91xdIgPaFOY8HluLxeP83yq6lXRlkYHDl3-No&_nc_zt=24&_nc_ht=scontent.fcai2-1.fna&_nc_gid=5w5Let3bZdA6VAd7hP5Azg&oh=00_AfLXKg2VQZtua-psnbQTXVINuSNfV32KgYRETDuojJBpPw&oe=683609B3" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Chairman';" alt="صورة رئيس مجلس الإدارة" loading="lazy">
+                            <h3>Abdelmaseh Sherif <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Chairman</p>
+                            <div class="member-social-links">
+                                <a href="https://www.facebook.com/Se7aSherif" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Abdelmaseh Sherif"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/abdelmaseh-sherif-placeholder" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Abdelmaseh Sherif"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="high-board-level vice-chairman-level">
+                        <div class="member-card animate-on-scroll">
+                             <img src="https://scontent.fcai2-2.fna.fbcdn.net/v/t39.30808-1/467778849_1977281222685831_8816328720144940843_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=LTHRgMtzdygQ7kNvwE7wnYq&_nc_oc=AdkvN2nkBKYMiMXlBscq-ucN0T9JKq2FgOlNZVuL-jtwCs68EnXSvzwfnK4iyUbypcA&_nc_zt=24&_nc_ht=scontent.fcai2-2.fna&_nc_gid=PEP5uE_Dgq5aPwulFYOGUg&oh=00_AfKDktUNwoUU-eucq_DTsTHY38rjWIHaGu7oSk2YB1nL_Q&oe=6835F810" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Vice+Chairman';" alt="صورة نائب رئيس مجلس الإدارة" loading="lazy">
+                            <h3>Osama Maher <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Vice Chairman</p>
+                            <div class="member-social-links">
+                                <a href="https://www.facebook.com/Osama.MHAMS" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Osama Maher"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/osama-maher-placeholder" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Osama Maher"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="high-board-level other-roles-level">
+                        <div class="member-card animate-on-scroll">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Treasurer" alt="صورة أمين الصندوق" loading="lazy">
+                            <h3>Khaled Mahmoud <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Treasurer</p>
+                        </div>
+                        <div class="member-card animate-on-scroll">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Secretary" alt="صورة السكرتير" loading="lazy">
+                            <h3>Nour El-Din <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Secretary</p>
+                        </div>
+                        <div class="member-card animate-on-scroll">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Web+Master" alt="صورة مسؤول الموقع" loading="lazy">
+                            <h3>Sara Tarek <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Web Master</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-category">
+                <h2>Board Members - Team Heads</h2>
+                <div class="members-grid">
+                    <div class="member-card animate-on-scroll">
+                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Power" alt="صورة رئيس فريق الطاقة" loading="lazy">
+                        <h3>Ahmed Gamal <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Head of Power Team</p>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Marketing" alt="صورة رئيس فريق التسويق" loading="lazy">
+                        <h3>Laila Mostafa <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Head of Marketing Team</p>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Org" alt="صورة رئيس فريق التنظيم" loading="lazy">
+                        <h3>Youssef Adel <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Head of Organization Team</p>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Media" alt="صورة رئيس فريق الإعلام" loading="lazy">
+                        <h3>Hana Said <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Head of Media Team</p>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+HR" alt="صورة رئيس فريق الموارد البشرية" loading="lazy">
+                        <h3>Omar Farouk <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Head of HR Team</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-category">
+                <h2>Special Members</h2>
+                <div class="members-grid">
+                    <div class="member-card animate-on-scroll">
+                        <h3>John Doe <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Special Contributor</p>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <h3>Jane Smith <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                        <p>Distinguished Member</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5/">Home</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5/#about">About Us</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5-Membership/">Membership</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5-Events/">Events</a></li>
+                    <li><a href="#our-family">Our Family</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5-Ai/">AI Helper</a></li>
+                    <li><a href="https://minal0p.github.io/IEEE-ET5/#contact-us">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> ieee.et50@gmail.com</li>
+                    <li><i class="fas fa-phone-alt"></i> +20 120 300 6152</li>
+                    <li><i class="fas fa-map-marker-alt"></i> New Cairo Academy, Fifth Settlement </li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com/IEEE.ET5.SB " target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://linkedin.com/company/ieee-et5-student-branch " target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/ieee.et5.sb " target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 IEEE ET5 Student Branch. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animate on Scroll functionality
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+        function checkScroll() {
+            animateElements.forEach(el => {
+                const elementPosition = el.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+
+                if (elementPosition < screenPosition) {
+                    el.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Smooth Scroll to Anchors for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Exclude external links from smooth scrolling
+            if (anchor.getAttribute('href').startsWith('http') || anchor.getAttribute('href').startsWith('https')) {
+                return; // Skip smooth scroll for external links
+            }
+
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+
+                // Only proceed with smooth scroll if the href is not just '#'
+                // and actually points to an ID section.
+                if (targetId && targetId !== '#') {
+                    e.preventDefault(); // Prevent default only if it's a valid scroll target
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Offset by header height
+                            behavior: 'smooth'
+                        });
+                        // Close mobile nav menu if open after clicking a link
+                        if (navMenu.classList.contains('active')) {
+                            navMenu.classList.remove('active');
+                        }
+                    }
+                } else if (targetId === '#') {
+                    // If href is just '#', prevent default to stop page from jumping to top
+                    e.preventDefault();
+                    // Optionally, add specific logic for these placeholder links if needed in the future
+                }
+                // If href is not '#' and doesn't start with '#', let default behavior happen
+                // (e.g., external links, or links to other pages)
+            });
+        });
+    </script>
+</body>
+
+</html>
