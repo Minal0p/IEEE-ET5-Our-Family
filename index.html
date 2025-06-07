@@ -192,6 +192,16 @@
 
         /* Mobile navigation */
         @media (max-width: 768px) {
+            .header-container {
+                 flex-direction: row;
+                 justify-content: space-between;
+                 align-items: center;
+            }
+
+            .logo {
+                margin-bottom: 0;
+            }
+            
             .menu-toggle {
                 display: block;
             }
@@ -201,6 +211,7 @@
                 width: 100%;
                 background: var(--primary);
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                order: 3; /* Position nav below logo and toggle */
             }
 
             nav.active {
@@ -211,8 +222,8 @@
             nav ul {
                 flex-direction: column;
                 padding: 1rem 0;
-                text-align: left;
-                /* Align to left for LTR */
+                text-align: center;
+                 align-items: center;
             }
 
             nav ul li {
@@ -281,6 +292,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+            align-items: stretch; /* Ensure all grid items stretch to the same height */
         }
 
         .member-card {
@@ -294,7 +306,14 @@
             overflow: hidden;
             opacity: 0;
             transform: translateY(30px) scale(0.95);
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack items vertically */
         }
+
+        .member-card-content {
+            flex-grow: 1; /* Allow content to grow and fill space */
+        }
+
 
         .member-card.animated {
             opacity: 1;
@@ -310,7 +329,6 @@
             margin-bottom: 0.5rem;
             color: var(--primary);
             font-size: 1.5rem;
-            /* Removed flex properties from h3 */
         }
 
         /* Styles for social link icons when placed below */
@@ -333,6 +351,10 @@
 
         .member-social-links a.linkedin-icon {
             color: #0a66c2; /* LinkedIn blue */
+        }
+        
+        .member-social-links a.whatsapp-icon {
+            color: #25D366; /* WhatsApp green */
         }
 
         .member-social-links a:hover {
@@ -439,13 +461,8 @@
             width: 100%;
             position: relative;
             /* For pseudo-elements */
-        }
-
-        .high-board-level.other-roles-level {
-            flex-wrap: wrap;
-            /* Allow cards to wrap on smaller screens */
-            gap: 2rem;
-            /* Space between cards in this level */
+            flex-wrap: wrap; /* Allow wrapping for all levels */
+            gap: 2rem; /* Add gap for all levels */
         }
 
         /* Lines for the tree structure */
@@ -502,10 +519,6 @@
             z-index: 2;
             /* Ensure cards are above lines */
         }
-
-        /* Board Members Tree Structure Specific Styles (Reverted to standard grid) */
-        /* Removed all specific tree-like styles for .board-members-tree-container and its children */
-
 
         /* Call to Action Buttons */
         .cta-button {
@@ -680,11 +693,6 @@
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
             .logo {
                 margin-bottom: 1rem;
             }
@@ -701,15 +709,47 @@
 
         @media (max-width: 768px) {
             section {
-                padding: 2rem 1rem;
+                padding: 3rem 1rem; /* Adjusted padding */
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem; /* Adjusted font size */
+            }
+
+            .logo-text h1 {
+                font-size: 1.3rem; /* Slightly smaller for mobile header */
+            }
+
+            .logo-text span {
+                font-size: 0.7rem; /* Slightly smaller for mobile header */
             }
 
             .members-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+            
+            .high-board-tree-container {
+                gap: 1.5rem; /* Reduce gap on mobile */
+            }
+
+            .member-card h3 {
+                /* Stack name and badge on mobile to prevent overflow */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.25rem;
+            }
+
+            .membership-badge {
+                margin-left: 0; /* Reset margin */
+                margin-top: 0.5rem; /* Add some space above the badge */
+            }
+
+            /* Remove tree lines on mobile for a cleaner look */
+            .chairman-level::after,
+            .vice-chairman-level::after,
+            .other-roles-level::before {
+                display: none;
             }
 
             .footer-container {
@@ -730,9 +770,6 @@
             .social-links {
                 justify-content: center;
             }
-
-            /* Responsive adjustments for tree lines */
-            /* Removed specific responsive adjustments for tree lines */
         }
     </style>
 </head>
@@ -776,89 +813,172 @@
                 <h2>Consular</h2>
                 <div class="members-grid">
                     <div class="member-card animate-on-scroll">
-                        <img src="https://scontent.fcai2-1.fna.fbcdn.net/v/t39.30808-1/315776552_5422101484554928_5467481616298383183_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=109&ccb=1-7&_nc_sid=e99d92&_nc_ohc=7IAZWc53bagQ7kNvwGB3jfL&_nc_oc=AdmRaBc4d5ZcdQbNyieMLIivKxAvL6XoDRfkvMQIO15sa7oCR0ZjxfNLmWzvTSTUfXE&_nc_zt=24&_nc_ht=scontent.fcai2-1.fna&_nc_gid=z6Z2KFzv_YtX7aHR74LsIw&oh=00_AfKwJ-b2r9Zxs8M-_y98cR9AbpyJFPiOb03J4RhCAj_H7w&oe=6835F8E1" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Consular';" alt="صورة المستشار" loading="lazy">
-                        <h3>Dina Rostom <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Branch Consular</p>
+                        <div class="member-card-content">
+                            <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Dina%20Rostom.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Consular';" alt="صورة المستشار" loading="lazy">
+                            <h3>Dina Rostom <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Branch Consular</p>
+                        </div>
                         <div class="member-social-links">
                             <a href="https://www.facebook.com/dina.zaki.58" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Dina Rostom"><i class="fab fa-facebook-f"></i></a>
                             <a href="https://www.linkedin.com/in/dina-rostom-b5980b257?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAD9NYLUB-VspTGfD7YVDUb2xvZr-16E4lqs&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3B97Q1fV3HRvupVFc%2F%2B51wsg%3D%3D" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Dina Rostom"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201203006152" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Dina Rostom on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="member-category">
-                <h2>High Board</h2>
+                <h2> Officers </h2>
                 <div class="high-board-tree-container">
                     <div class="high-board-level chairman-level">
                         <div class="member-card animate-on-scroll">
-                            <img src="https://scontent.fcai2-1.fna.fbcdn.net/v/t39.30808-1/457438899_2249958492009348_5597224282149931167_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=1d2534&_nc_ohc=4FnQeJG4OSkQ7kNvwEyEbi2&_nc_oc=AdlIULNytXu7prITecIIivMAjT-0VG91xdIgPaFOY8HluLxeP83yq6lXRlkYHDl3-No&_nc_zt=24&_nc_ht=scontent.fcai2-1.fna&_nc_gid=5w5Let3bZdA6VAd7hP5Azg&oh=00_AfLXKg2VQZtua-psnbQTXVINuSNfV32KgYRETDuojJBpPw&oe=683609B3" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Chairman';" alt="صورة رئيس مجلس الإدارة" loading="lazy">
-                            <h3>Abdelmaseh Sherif <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                            <p>Chairman</p>
+                            <div class="member-card-content">
+                                <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Mena%20Philip%20(1).png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Chairman';" alt="صورة رئيس مجلس الإدارة" loading="lazy">
+                                <h3>Mena Philip<span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                                <p>Chairman</p>
+                            </div>
                             <div class="member-social-links">
-                                <a href="https://www.facebook.com/Se7aSherif" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Abdelmaseh Sherif"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://www.linkedin.com/in/abdelmaseh-sherif-placeholder" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Abdelmaseh Sherif"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=100004623032980" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Mena Philip"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/mena-philip-766454340/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Mena Philip"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/201203006152" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Mena Philip on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="high-board-level vice-chairman-level">
                         <div class="member-card animate-on-scroll">
-                             <img src="https://scontent.fcai2-2.fna.fbcdn.net/v/t39.30808-1/467778849_1977281222685831_8816328720144940843_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=LTHRgMtzdygQ7kNvwE7wnYq&_nc_oc=AdkvN2nkBKYMiMXlBscq-ucN0T9JKq2FgOlNZVuL-jtwCs68EnXSvzwfnK4iyUbypcA&_nc_zt=24&_nc_ht=scontent.fcai2-2.fna&_nc_gid=PEP5uE_Dgq5aPwulFYOGUg&oh=00_AfKDktUNwoUU-eucq_DTsTHY38rjWIHaGu7oSk2YB1nL_Q&oe=6835F810" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Vice+Chairman';" alt="صورة نائب رئيس مجلس الإدارة" loading="lazy">
-                            <h3>Osama Maher <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                            <p>Vice Chairman</p>
+                             <div class="member-card-content">
+                                <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Omar%20Ramady.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Vice+Chairman';" alt="صورة نائب رئيس مجلس الإدارة" loading="lazy">
+                                <h3>Omar Alramady<span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                                <p>Vice Chairman Technical</p>
+                            </div>
                             <div class="member-social-links">
-                                <a href="https://www.facebook.com/Osama.MHAMS" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Osama Maher"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://www.linkedin.com/in/osama-maher-placeholder" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Osama Maher"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.facebook.com/omar.al.ramady.2025/" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Omar Alramady"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/omar-al-ramady-3a2022206/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Omar Alramady"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/201203006152" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Omar Alramady on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                             </div>
                         </div>
+
+                        
+                         <div class="member-card animate-on-scroll">
+                            <div class="member-card-content">
+                                <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/personal-image//Mina%20Hanna.png" alt="صورة السكرتير" loading="lazy">
+                                <h3>Mina Hanna <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                                <p>Secretary</p>
+                            </div>
+                            <div class="member-social-links">
+                                <a href="https://www.facebook.com/Eng.Mina.H.F" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Mina Hanna"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/engminahanna/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Mina Hanna"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/201203006152" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Mina Hanna on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+
+                         <div class="member-card animate-on-scroll">
+                             <div class="member-card-content">
+                                <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Osama%20Ahmed.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Vice+Chairman';" alt="صورة نائب رئيس مجلس الإدارة" loading="lazy">
+                                <h3>Osama Ahmed<span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                                <p>Vice Chairman Non-Technical</p>
+                            </div>
+                            <div class="member-social-links">
+                                <a href="https://www.facebook.com/osama.ahmed.902230" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Osama Ahmed"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Osama Ahmed"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/+201033627952" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Osama Ahmed on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+
                     </div>
+                    
                     <div class="high-board-level other-roles-level">
                         <div class="member-card animate-on-scroll">
-                            <img src="https://placehold.co/100x100/FFD100/003865?text=Treasurer" alt="صورة أمين الصندوق" loading="lazy">
-                            <h3>Khaled Mahmoud <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                            <p>Treasurer</p>
+                             <div class="member-card-content">
+                                <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Khaled%20Morsy.jpg" alt="صورة أمين الصندوق" loading="lazy">
+                                <h3>Khaled Morsy<span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                                <p>Treasurer</p>
+                            </div>
+                            <div class="member-social-links">
+                                <a href="https://www.facebook.com/Khaled.morsy6/" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Khaled Morsy"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/khaled-aboelsoud-249950263/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Khaled Morsy"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/201093504881" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Khaled Morsy on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
+                       
                         <div class="member-card animate-on-scroll">
-                            <img src="https://placehold.co/100x100/FFD100/003865?text=Secretary" alt="صورة السكرتير" loading="lazy">
-                            <h3>Nour El-Din <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                            <p>Secretary</p>
-                        </div>
-                        <div class="member-card animate-on-scroll">
-                            <img src="https://placehold.co/100x100/FFD100/003865?text=Web+Master" alt="صورة مسؤول الموقع" loading="lazy">
-                            <h3>Sara Tarek <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                            <p>Web Master</p>
+                            <div class="member-card-content">
+                                <img src="https://placehold.co/100x100/FFD100/003865?text=Web+Master" alt="صورة مسؤول الموقع" loading="lazy">
+                                <h3>Sara Tarek <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                                <p>Web Master</p>
+                            </div>
+                             <div class="member-social-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Sara Tarek"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Sara Tarek"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Sara Tarek on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="member-category">
-                <h2>Board Members - Team Heads</h2>
+                <h2>High Board Members - Team Heads</h2>
                 <div class="members-grid">
                     <div class="member-card animate-on-scroll">
-                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Power" alt="صورة رئيس فريق الطاقة" loading="lazy">
-                        <h3>Ahmed Gamal <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Head of Power Team</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Power" alt="صورة رئيس فريق الطاقة" loading="lazy">
+                            <h3>Ahmed Gamal <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Head of Power Team</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Ahmed Gamal"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Ahmed Gamal"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Ahmed Gamal on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                     <div class="member-card animate-on-scroll">
-                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Marketing" alt="صورة رئيس فريق التسويق" loading="lazy">
-                        <h3>Laila Mostafa <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Head of Marketing Team</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Marketing" alt="صورة رئيس فريق التسويق" loading="lazy">
+                            <h3>Laila Mostafa <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Head of Marketing Team</p>
+                        </div>
+                        <div class="member-social-links">
+                             <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Laila Mostafa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Laila Mostafa"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Laila Mostafa on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                     <div class="member-card animate-on-scroll">
-                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Org" alt="صورة رئيس فريق التنظيم" loading="lazy">
-                        <h3>Youssef Adel <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Head of Organization Team</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Org" alt="صورة رئيس فريق التنظيم" loading="lazy">
+                            <h3>Youssef Adel <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Head of Organization Team</p>
+                        </div>
+                         <div class="member-social-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Youssef Adel"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Youssef Adel"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Youssef Adel on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                     <div class="member-card animate-on-scroll">
-                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Media" alt="صورة رئيس فريق الإعلام" loading="lazy">
-                        <h3>Hana Said <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Head of Media Team</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Head+Media" alt="صورة رئيس فريق الإعلام" loading="lazy">
+                            <h3>Hana Said <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Head of Media Team</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Hana Said"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Hana Said"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Hana Said on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                     <div class="member-card animate-on-scroll">
-                        <img src="https://placehold.co/100x100/FFD100/003865?text=Head+HR" alt="صورة رئيس فريق الموارد البشرية" loading="lazy">
-                        <h3>Omar Farouk <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Head of HR Team</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Head+HR" alt="صورة رئيس فريق الموارد البشرية" loading="lazy">
+                            <h3>Omar Farouk <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Head of HR Team</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Omar Farouk"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Omar Farouk"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Omar Farouk on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -867,12 +987,84 @@
                 <h2>Special Members</h2>
                 <div class="members-grid">
                     <div class="member-card animate-on-scroll">
-                        <h3>John Doe <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Special Contributor</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Special Contributor" alt="صورة مسؤول الموقع" loading="lazy">
+                            <h3>John Doe <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Special Contributor</p>
+                        </div>
+                        <div class="member-social-links">
+                           <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for John Doe"><i class="fab fa-facebook-f"></i></a>
+                           <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for John Doe"><i class="fab fa-linkedin-in"></i></a>
+                           <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact John Doe on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                     <div class="member-card animate-on-scroll">
-                        <h3>Jane Smith <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
-                        <p>Distinguished Member</p>
+                        <div class="member-card-content">
+                            <img src="https://placehold.co/100x100/FFD100/003865?text=Distinguished Member" alt="صورة مسؤول الموقع" loading="lazy">
+                            <h3>Jane Smith <span class="membership-badge">Membership <i class="fas fa-star star-icon"></i></span></h3>
+                            <p>Distinguished Member</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Jane Smith"><i class="fab fa-facebook-f"></i></a>
+                           <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Jane Smith"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Jane Smith on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-category">
+                <h2>Ex Officers</h2>
+                <div class="members-grid">
+                    <div class="member-card animate-on-scroll">
+                        <div class="member-card-content">
+                            <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Abdelmaseh%20Sherif%20.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Chairman';" alt="صورة رئيس مجلس الإدارة السابق" loading="lazy">
+                            <h3>Abdelmaseh Sherif <span class="membership-badge">Graduated <i class="fas fa-graduation-cap star-icon"></i></span></h3>
+                            <p>Chairman (2024-2025)</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="https://www.facebook.com/Se7aSherif" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Abdelmaseh Sherif"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/abdelmaseh-sherif-placeholder" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Abdelmaseh Sherif"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201282731176" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Abdelmaseh Sherif on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <div class="member-card-content">
+                             <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Osama%20Maher.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Vice+Chairman';" alt="صورة نائب رئيس مجلس الإدارة السابق" loading="lazy">
+                            <h3>Osama Maher <span class="membership-badge">Graduated <i class="fas fa-graduation-cap star-icon"></i></span></h3>
+                            <p>Vice Chairman (2024-2025)</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="https://www.facebook.com/Osama.MHAMS" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Osama Maher"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/osama-maher-placeholder" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Osama Maher"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201096859930" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Osama Maher on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="members-grid">    
+                    <div class="member-card animate-on-scroll">
+                        <div class="member-card-content">
+                            <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/AbdEl%20Moemen%20Mansour.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Treasurer';" alt="صورة AbdEl Moemen Mansour" loading="lazy">
+                            <h3>AbdEl Moemen Mansour</h3>
+                            <p>Treasurer (2024-2025)</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="https://www.facebook.com/momn.mnsor.12?__tn__=%3C" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for AbdEl Moemen Mansour"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for AbdEl Moemen Mansour"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201119859122" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact AbdEl Moemen Mansour on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-card animate-on-scroll">
+                        <div class="member-card-content">
+                            <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/ieee-members/officers/Mohamed%20Abd%20Al-Nasser.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/FFD100/003865?text=Secretary';" alt="صورة Mohamed Abd Al-Nasser" loading="lazy">
+                            <h3>Mohamed Abd Al-Nasser</h3>
+                            <p>Secretary (2024-2025)</p>
+                        </div>
+                        <div class="member-social-links">
+                            <a href="https://www.facebook.com/mohamed.abd.all.nasser" target="_blank" rel="noopener noreferrer" class="facebook-icon" aria-label="Facebook Profile for Mohamed Abd Al-Nasser"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn Profile for Mohamed Abd Al-Nasser"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/201127974006" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Contact Mohamed Abd Al-Nasser on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
